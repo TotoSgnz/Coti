@@ -38,6 +38,12 @@ export interface FilaPedido {
   observaciones: string;
 }
 
+// Orden de columnas editables de la grilla de Pedido, tal como aparecen
+// visualmente (sin "Detalle", que es derivado del catálogo). Se usa para
+// mapear filas/columnas al pegar o copiar bloques desde Excel.
+export const FILAS_COLUMNAS = ["cant", "cod", "alto", "ancho", "prof", "observaciones"] as const;
+export type FilaColumnaEditable = (typeof FILAS_COLUMNAS)[number];
+
 export interface CabeceraPedido {
   cliente: string;
   proyecto: string;

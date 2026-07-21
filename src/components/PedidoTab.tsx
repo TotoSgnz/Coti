@@ -1,5 +1,7 @@
-import { Plus, Trash2, AlertTriangle } from "lucide-react";
-import type { FilaPedido, Modulo } from "../types";
+import { useState, type ClipboardEvent } from "react";
+import { Plus, Trash2, AlertTriangle, Copy, Check } from "lucide-react";
+import { FILAS_COLUMNAS, type FilaPedido, type Modulo } from "../types";
+import { filasATsv, parsePegado } from "../lib/clipboardGrilla";
 
 export interface FilaCalculada extends FilaPedido {
   modulo: Modulo | undefined;
@@ -11,10 +13,37 @@ interface Props {
   onActualizarFila: (id: number, campo: keyof FilaPedido, valor: string) => void;
   onAgregarFila: () => void;
   onBorrarFila: (id: number) => void;
+  onPegarBloque: (filaIndex: number, colIndex: number, matriz: string[][]) => void;
 }
 
-export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBorrarFila }: Props) {
+export default function PedidoTab({
+  filas,
+  onActualizarFila,
+  onAgregarFila,
+  onBorrarFila,
+  onPegarBloque,
+}: Props) {
+  const [copiado, setCopiado] = useState(false);
+  const [errorCopiar, setErrorCopiar] = useState("");
   const filasConError = filas.filter((f) => f.cod && !f.encontrado).length;
+
+  const manejarPegado = (e: ClipboardEvent<HTMLInputElement>, filaIndex: number, colIndex: number) => {
+    const texto = e.clipboardData.getData("text/plain");
+    if (!texto.includes("\t") && !texto.includes("\n")) return; // celda única: paste normal del input
+    e.preventDefault();
+    onPegarBloque(filaIndex, colIndex, parsePegado(texto));
+  };
+
+  const copiarGrilla = async () => {
+    try {
+      await navigator.clipboard.writeText(filasATsv(filas));
+      setErrorCopiar("");
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 1500);
+    } catch {
+      setErrorCopiar("No se pudo copiar — el navegador denegó el permiso de portapapeles.");
+    }
+  };
 
   return (
     <div className="panel">
@@ -44,6 +73,7 @@ export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBo
                     min="0"
                     value={f.cant}
                     onChange={(e) => onActualizarFila(f.id, "cant", e.target.value)}
+                    onPaste={(e) => manejarPegado(e, i, FILAS_COLUMNAS.indexOf("cant"))}
                   />
                 </td>
                 <td>
@@ -53,6 +83,7 @@ export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBo
                     placeholder="AL2P"
                     value={f.cod}
                     onChange={(e) => onActualizarFila(f.id, "cod", e.target.value)}
+                    onPaste={(e) => manejarPegado(e, i, FILAS_COLUMNAS.indexOf("cod"))}
                   />
                 </td>
                 <td className="td-detalle">
@@ -65,6 +96,7 @@ export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBo
                     placeholder="cm"
                     value={f.alto}
                     onChange={(e) => onActualizarFila(f.id, "alto", e.target.value)}
+                    onPaste={(e) => manejarPegado(e, i, FILAS_COLUMNAS.indexOf("alto"))}
                   />
                 </td>
                 <td>
@@ -74,6 +106,7 @@ export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBo
                     placeholder="cm"
                     value={f.ancho}
                     onChange={(e) => onActualizarFila(f.id, "ancho", e.target.value)}
+                    onPaste={(e) => manejarPegado(e, i, FILAS_COLUMNAS.indexOf("ancho"))}
                   />
                 </td>
                 <td>
@@ -83,6 +116,7 @@ export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBo
                     placeholder="cm"
                     value={f.prof}
                     onChange={(e) => onActualizarFila(f.id, "prof", e.target.value)}
+                    onPaste={(e) => manejarPegado(e, i, FILAS_COLUMNAS.indexOf("prof"))}
                   />
                 </td>
                 <td>
@@ -92,6 +126,7 @@ export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBo
                     placeholder="—"
                     value={f.observaciones}
                     onChange={(e) => onActualizarFila(f.id, "observaciones", e.target.value)}
+                    onPaste={(e) => manejarPegado(e, i, FILAS_COLUMNAS.indexOf("observaciones"))}
                   />
                 </td>
                 <td>
@@ -105,9 +140,22 @@ export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBo
         </table>
       </div>
 
-      <button className="add-btn" onClick={onAgregarFila}>
-        <Plus size={15} /> Agregar línea
-      </button>
+      <div className="pedido-acciones">
+        <button className="add-btn" onClick={onAgregarFila}>
+          <Plus size={15} /> Agregar línea
+        </button>
+        <button className="add-btn" onClick={copiarGrilla}>
+          {copiado ? <Check size={15} /> : <Copy size={15} />}
+          {copiado ? "Copiado" : "Copiar"}
+        </button>
+        {errorCopiar && <span className="copiar-error">{errorCopiar}</span>}
+      </div>
+
+      <div className="config-hint" style={{ marginTop: 10 }}>
+        Podés pegar directamente celdas copiadas desde Excel (seleccioná el rango y Ctrl/Cmd+V sobre cualquier
+        celda de la grilla) — llena Cant, Cód, Alto, Ancho, Prof y Observaciones en ese orden, agregando filas si
+        hacen falta.
+      </div>
 
       {filasConError > 0 && (
         <div className="warn-banner">

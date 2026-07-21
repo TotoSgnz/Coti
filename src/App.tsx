@@ -1,6 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { ClipboardList, Layers, Settings2 } from "lucide-react";
-import { CABECERA_VACIA, PIEZA_ORDER, type CabeceraPedido, type FilaPedido, type Modulo, type Piezas } from "./types";
+import {
+  CABECERA_VACIA,
+  FILAS_COLUMNAS,
+  PIEZA_ORDER,
+  type CabeceraPedido,
+  type FilaPedido,
+  type Modulo,
+  type Piezas,
+} from "./types";
 import { calcularPiezas } from "./engine/materiaPrima";
 import { CATALOGO_SEMILLA } from "./data/catalogoSemilla";
 import { loadJSON, saveJSON } from "./lib/storage";
@@ -86,6 +94,27 @@ export default function App() {
   };
   const agregarFila = () => setFilas((prev) => [...prev, filaVacia()]);
   const borrarFila = (id: number) => setFilas((prev) => prev.filter((f) => f.id !== id));
+
+  const pegarBloque = (filaIndex: number, colIndex: number, matriz: string[][]) => {
+    setFilas((prev) => {
+      const next = [...prev];
+      const filasNecesarias = filaIndex + matriz.length;
+      while (next.length < filasNecesarias) next.push(filaVacia());
+
+      matriz.forEach((valores, r) => {
+        const idx = filaIndex + r;
+        const fila = { ...next[idx] };
+        valores.forEach((valor, c) => {
+          const campo = FILAS_COLUMNAS[colIndex + c];
+          if (!campo) return; // se pegaron más columnas de las que hay a partir de acá
+          fila[campo] = valor;
+        });
+        next[idx] = fila;
+      });
+
+      return next;
+    });
+  };
 
   const actualizarCabecera = (campo: keyof CabeceraPedido, valor: string) => {
     setCabecera((prev) => ({ ...prev, [campo]: valor }));
@@ -176,6 +205,7 @@ export default function App() {
             onActualizarFila={actualizarFila}
             onAgregarFila={agregarFila}
             onBorrarFila={borrarFila}
+            onPegarBloque={pegarBloque}
           />
         </>
       )}
