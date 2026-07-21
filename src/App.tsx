@@ -1,28 +1,38 @@
 import { useEffect, useMemo, useState } from "react";
 import { ClipboardList, Layers, Settings2 } from "lucide-react";
-import { PIEZA_ORDER, type FilaPedido, type Modulo, type Piezas } from "./types";
+import { CABECERA_VACIA, PIEZA_ORDER, type CabeceraPedido, type FilaPedido, type Modulo, type Piezas } from "./types";
 import { calcularPiezas } from "./engine/materiaPrima";
 import { CATALOGO_SEMILLA } from "./data/catalogoSemilla";
 import { loadJSON, saveJSON } from "./lib/storage";
 import CatalogoPanel, { type CatalogoInfo } from "./components/CatalogoPanel";
+import CabeceraPedidoForm from "./components/CabeceraPedidoForm";
 import PedidoTab, { type FilaCalculada } from "./components/PedidoTab";
 import MateriaPrimaTab from "./components/MateriaPrimaTab";
 
 const STORAGE_KEYS = {
   filas: "pedido-filas",
+  cabecera: "pedido-cabecera",
   catalogo: "catalogo-cache",
   sheetUrl: "sheet-url",
 };
 
 let uid = 1;
 const nextId = () => uid++;
-const filaVacia = (): FilaPedido => ({ id: nextId(), cant: 1, cod: "", alto: "", ancho: "", prof: "" });
+const filaVacia = (): FilaPedido => ({
+  id: nextId(),
+  cant: 1,
+  cod: "",
+  alto: "",
+  ancho: "",
+  prof: "",
+  observaciones: "",
+});
 
 function filasIniciales(): FilaPedido[] {
-  const guardadas = loadJSON<FilaPedido[]>(STORAGE_KEYS.filas);
+  const guardadas = loadJSON<Array<Partial<FilaPedido> & { id: number }>>(STORAGE_KEYS.filas);
   if (guardadas?.length) {
     uid = Math.max(...guardadas.map((f) => f.id || 0)) + 1;
-    return guardadas;
+    return guardadas.map((f) => ({ ...filaVacia(), ...f, id: f.id }));
   }
   return [filaVacia(), filaVacia(), filaVacia()];
 }
@@ -47,6 +57,9 @@ export default function App() {
     return cache ? { fuente: cache.fuente, actualizado: cache.actualizado } : { fuente: "semilla", actualizado: null };
   });
   const [sheetUrl, setSheetUrl] = useState(() => loadJSON<string>(STORAGE_KEYS.sheetUrl) ?? "");
+  const [cabecera, setCabecera] = useState<CabeceraPedido>(
+    () => ({ ...CABECERA_VACIA, ...loadJSON<CabeceraPedido>(STORAGE_KEYS.cabecera) })
+  );
 
   useEffect(() => {
     saveJSON(STORAGE_KEYS.filas, filas);
@@ -55,6 +68,10 @@ export default function App() {
   useEffect(() => {
     saveJSON(STORAGE_KEYS.sheetUrl, sheetUrl);
   }, [sheetUrl]);
+
+  useEffect(() => {
+    saveJSON(STORAGE_KEYS.cabecera, cabecera);
+  }, [cabecera]);
 
   const catalogoPorCod = useMemo(() => {
     const map: Record<string, Modulo> = {};
@@ -69,6 +86,10 @@ export default function App() {
   };
   const agregarFila = () => setFilas((prev) => [...prev, filaVacia()]);
   const borrarFila = (id: number) => setFilas((prev) => prev.filter((f) => f.id !== id));
+
+  const actualizarCabecera = (campo: keyof CabeceraPedido, valor: string) => {
+    setCabecera((prev) => ({ ...prev, [campo]: valor }));
+  };
 
   const handleCatalogoActualizado = (nuevasFilas: Modulo[], fuente: "sheet") => {
     setCatalogo(nuevasFilas);
@@ -146,12 +167,17 @@ export default function App() {
       </nav>
 
       {tab === "pedido" && (
-        <PedidoTab
-          filas={filasCalculadas}
-          onActualizarFila={actualizarFila}
-          onAgregarFila={agregarFila}
-          onBorrarFila={borrarFila}
-        />
+        <>
+          <div className="panel cabecera-panel">
+            <CabeceraPedidoForm cabecera={cabecera} onCambiarCampo={actualizarCabecera} />
+          </div>
+          <PedidoTab
+            filas={filasCalculadas}
+            onActualizarFila={actualizarFila}
+            onAgregarFila={agregarFila}
+            onBorrarFila={borrarFila}
+          />
+        </>
       )}
 
       {tab === "materia" && (

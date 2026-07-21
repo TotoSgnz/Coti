@@ -35,7 +35,38 @@ export interface FilaPedido {
   alto: number | string;
   ancho: number | string;
   prof: number | string;
+  observaciones: string;
 }
+
+export interface CabeceraPedido {
+  cliente: string;
+  proyecto: string;
+  ciudad: string;
+  domicilio: string;
+  telefono: string;
+  email: string;
+  vendedor: string;
+  fechaVenta: string;
+  fechaVerificacion: string;
+  fechaEntrega: string;
+  importeCobrado: string;
+  anticipo: string;
+}
+
+export const CABECERA_VACIA: CabeceraPedido = {
+  cliente: "",
+  proyecto: "",
+  ciudad: "",
+  domicilio: "",
+  telefono: "",
+  email: "",
+  vendedor: "",
+  fechaVenta: "",
+  fechaVerificacion: "",
+  fechaEntrega: "",
+  importeCobrado: "",
+  anticipo: "",
+};
 
 export interface Piezas {
   pisoTecho: number;

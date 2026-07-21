@@ -29,6 +29,7 @@ export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBo
               <th style={{ width: 90 }}>Alto</th>
               <th style={{ width: 90 }}>Ancho</th>
               <th style={{ width: 90 }}>Prof</th>
+              <th style={{ width: 160 }}>Observaciones</th>
               <th style={{ width: 44 }}></th>
             </tr>
           </thead>
@@ -82,6 +83,15 @@ export default function PedidoTab({ filas, onActualizarFila, onAgregarFila, onBo
                     placeholder="cm"
                     value={f.prof}
                     onChange={(e) => onActualizarFila(f.id, "prof", e.target.value)}
+                  />
+                </td>
+                <td>
+                  <input
+                    className="cell-input"
+                    type="text"
+                    placeholder="—"
+                    value={f.observaciones}
+                    onChange={(e) => onActualizarFila(f.id, "observaciones", e.target.value)}
                   />
                 </td>
                 <td>
