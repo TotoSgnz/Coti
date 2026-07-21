@@ -1,0 +1,91 @@
+Cod,Detalle,Piso/Techo,Laterales,Fajas,Est AL,Est BM,Est DS,Pie Estante,Fondo,Frentes,Parante,PF
+BM1PI,BM 1 Puerta Izq,1,2,2,0,1,0,0,1,1,0,0
+BM1PD,BM 1 Puerta Der,1,2,2,0,1,0,0,1,1,0,0
+BM2P,BM 2 Puertas,1,2,2,0,1,0,1,1,1,0,0
+BM1PBB,BM Bajobacha 1 Puerta Izq,1,2,3,0,0,0,0,0,1,0,0
+BM2PBB,BM Bajobacha 2 Puertas,1,2,2,0,0,0,0,0,1,0,0
+BM2CBB,BM Bajobacha 2 Cajones,1,2,2,0,1,0,0,1,1,0,0
+BMEPF351PI,BM Esquinero PF 35 1 Puerta Izq,1,2,4,0,1,0,1,1,1,2,1
+BMEPF401PI,BM Esquinero PF 40 1 Puerta Izq,1,2,4,0,1,0,1,1,1,2,1
+BMEPF451PI,BM Esquinero PF 45 1 Puerta Izq,1,2,4,0,1,0,1,1,1,2,1
+BMEPF501PI,BM Esquinero PF 50 1 Puerta Izq,1,2,4,0,1,0,1,1,1,2,1
+BMEPF551PI,BM Esquinero PF 55 1 Puerta Izq,1,2,4,0,1,0,1,1,1,2,1
+BMEPF601PI,BM Esquinero PF 60 1 Puerta Izq,1,2,4,0,1,0,1,1,1,2,1
+BMEPF651PI,BM Esquinero PF 65 1 Puerta Izq,1,2,4,0,1,0,1,1,1,2,1
+BMEPF351PD,BM Esquinero PF 35 1 Puerta Der,1,2,4,0,1,0,1,1,1,2,1
+BMEPF401PD,BM Esquinero PF 40 1 Puerta Der,1,2,4,0,1,0,1,1,1,2,1
+BMEPF451PD,BM Esquinero PF 45 1 Puerta Der,1,2,4,0,1,0,1,1,1,2,1
+BMEPF501PD,BM Esquinero PF 50 1 Puerta Der,1,2,4,0,1,0,1,1,1,2,1
+BMEPF551PD,BM Esquinero PF 55 1 Puerta Der,1,2,4,0,1,0,1,1,1,2,1
+BMEPF601PD,BM Esquinero PF 60 1 Puerta Der,1,2,4,0,1,0,1,1,1,2,1
+BMEPF651PD,BM Esquinero PF 45 1 Puerta Der,1,2,4,0,1,0,1,1,1,2,1
+BM3C,BM 3 Cajones ,1,2,2,0,1,0,0,1,1,0,0
+BM3CO,BM 3 Cajones (1 Oculto),1,2,2,0,1,0,0,1,1,0,0
+BM2C,BM 2 Cajones,1,2,2,0,1,0,0,1,1,0,0
+BM2CE,BM 2 Cajones Especiero (Guias ocultas),1,2,2,0,1,0,0,1,1,0,0
+BM1H,BM 1 Herraje,1,2,2,0,1,0,1,1,1,0,0
+BM1CG,BM 1 Cajon Grande (2 telesc sin freno),1,2,2,0,1,0,0,1,1,0,0
+BM2P2C,BM 2 Puertas 2 Cajones,1,2,2,0,1,0,0,1,1,0,0
+BM1P2C,BM 1 Puertas 2 Cajones,1,2,2,0,1,0,0,1,1,0,0
+BMA,BM Abierto,1,2,2,0,1,0,0,1,0,0,0
+BMAE,BM Abierto con Estante,1,2,2,0,1,0,1,1,0,0,0
+BMPH,BM Porta Horno,1,2,2,0,0,0,0,1,1,0,0
+CH1PI,Columna Horno 1 Puerta Izq,2,2,2,0,1,0,0,0.5,0.5,0,0
+CH1PD,Columna Horno 1 Puerta Der,2,2,2,0,1,0,0,0.5,0.5,0,0
+CH2C,Columna Horno 2 Cajones,2,2,2,0,0,0,0,0.5,0.5,0,0
+CH3C,Columna Horno 3 Cajones,2,2,2,0,0,0,0,0.5,0.5,0,0
+CH3CO,Columna Horno 3 Cajones Oculto,2,2,2,0,0,0,0,0.5,0.5,0,0
+CH2CC,Columna Horno 2 Cajones Chico,2,2,2,0,0,0,0,0.5,0.5,0,0
+CH1C,Columna Horno 1 Cajones,2,2,2,0,0,0,0,0.5,0.5,0,0
+CMS1PI,Columna Microondas Superior 1 Puerta Izq,2,2,0,1,0,0,0,1,1,0,0
+CMS1PD,Columna Microondas Superior 1 Puerta Der,2,2,0,1,0,0,0,1,1,0,0
+LV1P,Lavavajillas 1 Puerta,0,0,0,0,0,0,0,0,1,0,0
+ALB,Alacena Banderola,2,2,1,1,0,0,1,1,1,0,0
+AL1PI,Alacena 1 Puerta Izq,2,2,1,1,0,0,1,1,1,0,0
+AL1PD,Alacena 1 Puerta Der,2,2,1,1,0,0,1,1,1,0,0
+AL2P,Alacena 2 Puertas,2,2,1,1,0,0,1,1,1,0,0
+ALAH,Alacena Abierta Horizontal,2,2,1,1,0,0,1,1,0,0,0
+ALAV,Alacena Abierta Vertical,1,1,1,1,0,0,1,1,0,0,0
+ALAMIC,Alacena Abierta Microondas,1,1,1,1,0,0,1,1,0,0,0
+ALE1PD,Alacena Esquinera 1 Puerta Der,2,2,1,1,0,0,1,1,0.7,2,0
+ALE1PI,Alacena Esquinera 1 Puerta Izq,2,2,1,1,0,0,1,1,0.7,2,0
+ALC,Alacena Colgado,1,2,0,0,0,0,0,1,0,0,0
+ALV,Alacena Vinero,2,7,0,1,0,0,0,1,0,0,0
+CC2P,Cubrecampana 2 Puertas,3,4,1,1,0,0,0,1,1,0,0
+SF1PI,Sobrepurificador 1 Puerta Izq,1,1,0,1,0,0,0,1,1,0,0
+SF1PD,Sobrepurificador 1 Puerta Der,1,1,0,1,0,0,0,1,1,0,0
+AL721PISM133,Alacena 1 Puerta Izq Sobremedida ,2,2,1,1,0,0,0,1,0,0,0
+AL601PDSM60,Alacena 1 Puerta Der Sobremedida,2,2,1,1,0,0,0,1,0,0,0
+DS1PI,Despensa 1 Puerta Izq,2,2,1,0,0,1,0,1,1,0,0
+DS1PD,Despensa 1 Puerta Der,2,2,1,0,0,1,0,1,1,0,0
+DSE1PI,Despensa Escobero 1 Puerta Izq,2,2,1,0,0,1,0,1,1,0,0
+DSE1PD,Despensa Escobero 1 Puerta Der,2,2,1,0,0,1,0,1,1,0,0
+DS2PI,Despensa 2 Puertas Izq,2,2,1,0,0,1,0,1,1,0,0
+DS2PD,Despensa 2 Puertas Der,2,2,1,0,0,1,0,1,1,0,0
+DSI2PI,Despensa Invertido 2 Puertas Izq,2,2,1,0,0,1,0,1,1,0,0
+DSI2PD,Despensa Invertido 2 Puertas Der,2,2,1,0,0,1,0,1,1,0,0
+DSA,Despensa Abierta,2,2,0,0,0,1,0,1,0,0,0
+ESCAF,Estación Cafe,2,2,0,1,1,1,0,1,0,0,0
+M1PI,Marco 1 Puerta Izq,2,2,0,0,0,0,0,0,1,0,0
+M1PD,Marco 1 Puerta Der,2,2,0,0,0,0,0,0,1,0,0
+M2P,Marco 2 Puertas,2,2,0,0,0,0,0,0,1,0,0
+AJNP,Ajuste Nivel Puerta,0,1,0,0,0,0,0,0,1,0,0
+AJS,Ajuste Simple,0,0,0,0,0,0,0,0,1,0,0
+AJU,Ajuste en U,0,2,0,0,0,0,0,0,1,0,0
+AJALNP,Alacena Ajuste Nivel Puerta,1,1,0,0,0,0,0,0,1,0,0
+AJALJS,Alacena Ajuste Simple,1,0,0,0,0,0,0,0,1,0,0
+CT,Cierre Techo,1,0,0,0,0,0,0,0,1,0,0
+CTM,Cierre Techo con Marco,2,2,2,0,0,0,0,0,1,0,0
+FV,Fondo Visto,0,0,0,0,0,0,0,1,0,0,0
+LAS,Lateral Aplicado Simple,0,1,0,0,0,0,0,0,0,0,0
+LAD,Lateral Aplicado Doble,0,2,0,0,0,0,0,0,0,0,0
+LAR,Lateral Aplicado Doble con Regrueso,0,1,0,0,0,0,0,0,0,4,0
+PA,Piso Alacena,1,0,0,0,0,0,0,0,0,0,0
+PALM,Piso Alacena Led Moa,1,0,0,0,0,0,0,0,0,0,0
+PAL,Piso Alacena Led,1,0,0,0,0,0,0,0,0,0,0
+TPS,Tapa Simple,1,0,0,0,0,0,0,0,0,0,0
+TPD,Tapa Doble,2,0,0,0,0,0,0,0,0,0,0
+TPR,Tapa Doble con Regrueso,1,2,2,0,0,0,0,0,0,0,0
+VAR,Varillado,0,0,0,0,0,0,0,2,0,0,0
+ZV,Zócalo Visto,0,3,0,0,0,0,0,1,1,0,0
+ZMDF,Zócalo MDF,0,3,0,0,0,0,0,1,1,0,0
